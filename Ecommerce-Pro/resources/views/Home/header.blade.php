@@ -26,30 +26,49 @@
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="contact.html">Contact</a>
-                           
+
                            <li>
-                            <form class="form-inline">
-                                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                             </form>
+                               <form class="form-inline">
+                                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                                       <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </li>
                         </li>
 
-                        </li>
-                        <li class="nav-item">
-                           <a class="btn btn-primary" id="logincss" href="contact.html">Login</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="btn btn-success" href="contact.html">Register</a>
-                        </li>
+                        @if (Route::has('login'))
+                        @auth
+                          <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">{{ Auth::user()->name }} <span class="caret"></span></a>
+                             <ul class="dropdown-menu">
+                                <li>
+                                   <form method="POST" action="{{ route('logout') }}">
+                                      @csrf
+                                      <input class="btn mx-2 py-2" type="submit" value="Logout">
+                                   </form>
+                                </li>
+                                <li><a href={{ route('profile.show') }}>Profile</a></li>
+                             </ul>
+                          </li>
+                        @else
+                            <li class="nav-item mx-2">
+                               <a class="btn btn-primary " href="{{ route('login') }}">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                  <a class="btn btn-success" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @endauth
+                       @endif
 
-                        {{-- <li class="nav-item">
-                           <a class="nav-link" href="#">
-                              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                                 <g>
+
+
+                    {{-- <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                                <g>
                                     <g>
-                                       <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                                          c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                                        <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                                        c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
                                     </g>
                                  </g>
                                  <g>

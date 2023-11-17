@@ -26,3 +26,6 @@ Route::middleware([
 });
 Route::get('/AdminDashboard',[HomeController::class,'AdminDashboard']);
 
+
+
+
