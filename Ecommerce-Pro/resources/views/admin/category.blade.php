@@ -33,12 +33,20 @@
         @include('admin.navbar')
           <!-- partial -->
 
-          @include('admin.body')
+
         <!-- main-panel ends -->
+        <div class="main-panal">
+            <div class="content-wrapper">
+              <div class="div-center text-center">
+                <!-- Add the 'text-center' class for horizontal centering -->
+                <p>Add category</p>
+              </div>
+            </div>
+          </div>
+
       </div>
-      <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
+
     <!-- plugins:js -->
     <script src="Home/admin/template/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->

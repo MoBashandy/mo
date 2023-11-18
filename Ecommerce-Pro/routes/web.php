@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,7 @@ Route::middleware([
     })->name('dashboard');
 });
 Route::get('/AdminDashboard',[HomeController::class,'AdminDashboard']);
-
+Route::get('/view_category',[AdminController::class,'view_category']);
 
 
 
