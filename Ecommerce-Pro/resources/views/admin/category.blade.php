@@ -21,6 +21,26 @@
     <link rel="stylesheet" href="Home/admin/template/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <style type="text/css">
+        .div-center{
+            text-align: center;
+            padding-top: 40px;
+        }
+        .h2ac{
+            font-size: 40px;
+            padding-bottom: 40px;
+        }
+        .text-color{
+            color: black ;
+        }
+        .center{
+            margin: auto;
+            width: 50%;
+            text-align: center;
+            margin-top: 30px;
+            border: 3px solid whitesmoke;
+        }
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -30,17 +50,41 @@
 
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
+
         @include('admin.navbar')
           <!-- partial -->
 
 
         <!-- main-panel ends -->
-        <div class="main-panal">
+        <div class="main-panel">
             <div class="content-wrapper">
-              <div class="div-center text-center">
-                <!-- Add the 'text-center' class for horizontal centering -->
-                <p>Add category</p>
-              </div>
+                <div class="div-center text-center">
+                    <!-- Add the 'text-center' class for horizontal centering -->
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
+                            {{session()->get('message')}}
+                        </div>
+                    @endif
+                    <h2 class="h2ac">Add category</h2>
+                    <form action="{{url('/add_category')}}" method="POST">
+                        @csrf
+                        <input type="text" name="category" class="text-color" placeholder="write category name" method="get">
+                        <input type="submit" name="submit" value="add category" class="btn btn-primary">
+                    </form>
+                  </div>
+                  <table class="center">
+                    <tr>
+                        <td>Category name</td>
+                        <td>Action</td>
+                    </tr>
+                    @foreach ($data as $data)
+                    <tr>
+                        <td>{{$data->category_name}}</td>
+                        <td><a class="btn btn-danger" href="{{url('delete_cateory',$data->id)}}">Delete</a></td>
+                    </tr>
+                    @endforeach
+                  </table>
             </div>
           </div>
 
