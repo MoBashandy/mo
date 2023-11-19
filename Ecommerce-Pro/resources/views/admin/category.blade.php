@@ -60,10 +60,10 @@
             <div class="content-wrapper">
                 <div class="div-center text-center">
                     <!-- Add the 'text-center' class for horizontal centering -->
-                    @if (session()->has('message'))
+                    @if(session()->has('message'))
                         <div class="alert alert-success">
                             <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
-                            {{session()->get('message')}}
+                            {{ session()->get('message') }}
                         </div>
                     @endif
                     <h2 class="h2ac">Add category</h2>
@@ -81,7 +81,7 @@
                     @foreach ($data as $data)
                     <tr>
                         <td>{{$data->category_name}}</td>
-                        <td><a class="btn btn-danger" href="{{url('delete_cateory',$data->id)}}">Delete</a></td>
+                        <td><a onclick="return confirm('Are you sure?')" class="btn btn-danger" href="{{url('delete_cateory',$data->id)}}">Delete</a></td>
                     </tr>
                     @endforeach
                   </table>
