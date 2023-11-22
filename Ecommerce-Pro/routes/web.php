@@ -25,10 +25,21 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+// Admin Dashboard
 Route::get('/AdminDashboard',[HomeController::class,'AdminDashboard']);
+
+// category
 Route::get('/view_category',[AdminController::class,'view_category']);
 Route::post('/add_category',[AdminController::class,'add_category']);
 Route::get('/delete_cateory/{id}',[AdminController::class,'delete_cateory']);
+// End category
+
+// product
+Route::get('/view_product',[AdminController::class,'view_product']);
+Route::post('/add_product',[AdminController::class,'add_product']);
+Route::get('/show_product',[AdminController::class,'show_product']);
+Route::get('/delete_product/{id}',[AdminController::class,'delete_product']);
+Route::get('/update_product/{id}',[AdminController::class,'update_product']);
 
 
 
