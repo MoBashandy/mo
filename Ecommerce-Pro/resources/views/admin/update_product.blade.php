@@ -80,10 +80,16 @@
         <!-- main-panel ends -->
         <div class="main-panel">
             <div class="content-wrapper">
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
+                    {{ session()->get('message') }}
+                </div>
+                @endif
                 <div class="div-center">
                     <div>
-                        <h2 class="h2ac">Add Product</h2>
-                        <form action="{{url('/add_product')}}" method="POST" enctype="multipart/form-data">
+                        <h2 class="h2ac">Update Product</h2>
+                        <form action="{{url('/update_product_confirm', $product->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-container">
                             <label class="label1">Product Title :</label>
@@ -114,9 +120,9 @@
                             <label class="label1">Product Category :</label>
                             <select class="text-color" name="category" id="" required>
                                 <option value="" selected="">{{$product->category}}</option>
-                                {{-- @foreach ($category as $category)
+                                @foreach ($category as $category)
                                 <option value="{{$category->category_name}}">{{$category->category_name}}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                         </div>
 
@@ -128,7 +134,7 @@
                         <div class="input-container">
                             <label class="label1" required>Change Product Image</label>
                             <input type="file" name="image">
-                            <input type="submit" value="Add Product" class="btn btn-primary" name="image">
+                            <input type="submit" value="Update Product" class="btn btn-primary" name="image">
                         </div>
                     </form>
                     </div>
