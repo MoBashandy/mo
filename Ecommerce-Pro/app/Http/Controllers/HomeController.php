@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $product = Product::paginate(3);
-        return view("Home.userpage", compact('product'));
-    }
     public function AdminDashboard()
     {
         $user = Auth::user(); // Retrieve the authenticated user
@@ -25,8 +20,14 @@ class HomeController extends Controller
         if ($user && $user->usertype == 1) {
             return view("admin.home");
         } else {
-            return view("Home.userpage");
+            $product =Product::paginate(3);
+            return view("Home.userpage", compact('product'));
         }
+    }
+    public function index()
+    {
+        $product = Product::paginate(3);
+        return view("Home.userpage", compact('product'));
     }
     public function product_details($id)
     {
@@ -68,14 +69,19 @@ class HomeController extends Controller
 
         public function show_cart()
         {
-            // Check if the user is authenticated
-            if (Auth::check()) {
+            if (Auth::id()) {
                 $id = Auth::user()->id;
                 $cart = Cart::where('user_id', '=', $id)->get();
                 return view("Home.show_cart", compact("cart"));
             } else {
                 return redirect('login');
             }
+        }
+        public function remove_cart($id)
+        {
+            $data=Cart::find($id);
+            $data->delete();
+            return redirect()->back()->with('message','Product Removed Successfully');
         }
 
     }

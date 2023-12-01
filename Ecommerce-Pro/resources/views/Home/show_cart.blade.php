@@ -23,7 +23,7 @@
       <style type="text/css">
         .center{
             margin: auto;
-            width: 50%;
+            width: 60%;
             text-align: center;
             padding: 30px;
         }
@@ -39,6 +39,11 @@
             height: 200px;
             width: 200px;
         }
+        .total{
+            font-size: 20px;
+            padding: 40px;
+
+        }
       </style>
    </head>
    <body>
@@ -50,6 +55,12 @@
       {{-- </div> --}}
 
       <div class="center">
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
+            {{ session()->get('message') }}
+        </div>
+        @endif
         <table>
             <tr>
                 <th class="th_deg">Product Title</th>
@@ -58,21 +69,29 @@
                 <th class="th_deg">Image</th>
                 <th class="th_deg">Action</th>
             </tr>
+            <?php
+             $total_price=0;
+            ?>
             @foreach ($cart as $cart)
             <tr>
                 <td>{{$cart->product_title}}</td>
                 <td>{{$cart->quantity}}</td>
-                <td>{{$cart->price}}</td>
+                <td>${{$cart->price}}</td>
                 <td><img class="img_deg" src="product/{{$cart->image}}" alt=""></td>
-                <td>{{$cart->product_title}}</td>
+                <td><a onclick="return confirm('Are you sure?')" class="btn btn-danger" href="{{url('remove_cart',$cart->id)}}">Remove Product</a></td>
             </tr>
+            <?php
+            $total_price += $cart->price;
+            ?>
             @endforeach
         </table>
+        <div>
+            <h1 class="total">
+                Total Price : ${{$total_price}}
+            </h1>
+        </div>
       </div>
 
-     <!-- footer start -->
-     @include('Home.footer')
-     <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
 
