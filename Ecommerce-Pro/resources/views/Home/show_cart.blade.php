@@ -90,6 +90,12 @@
                 Total Price : ${{$total_price}}
             </h1>
         </div>
+
+        <div>
+            <h1 style="font-size: 25px; padding-bottom:15px;">Proceed to Order</h1>
+            <a style="margin-right: 10px;" href="{{url('cash_order')}}" class="btn btn-danger" >Cash on Delivary </a>
+            <a style="margin-left: 10px;" href="" class="btn btn-danger" >Pay Using Card </a>
+        </div>
       </div>
 
       <div class="cpy_">

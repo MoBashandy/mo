@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -84,5 +85,35 @@ class HomeController extends Controller
             return redirect()->back()->with('message','Product Removed Successfully');
         }
 
-    }
+        public function cash_order()
+        {
+            $user = Auth::user();
+            $userid = $user -> id;
+            $data = Cart::where('user_id','=', $userid)->get();
+             foreach ($data as $data) {
+                $order = new Order;
+                $order -> name = $data -> name;
+                $order -> email = $data -> email;
+                $order -> phone = $data -> phone;
+                $order -> address = $data -> address;
+                $order -> user_id = $data -> user_id;
 
+                $order -> product_title = $data -> product_title;
+                $order -> product_id = $data -> product_id;
+                $order -> price = $data -> price;
+                $order -> quantity = $data -> quantity;
+                $order -> image = $data -> image;
+
+                $order -> payment_status ='cash on delivary';
+                $order -> delivary_status ='processing';
+
+                $order->save();
+
+                $cart_id = $data -> id;
+                $cart = cart::find($cart_id);
+                $cart -> delete();
+            }
+            return redirect()->back()->with('message','We Have Recevied Your Order . We Will Connect With You Soon .');
+        }
+
+}
