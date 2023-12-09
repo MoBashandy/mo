@@ -84,4 +84,7 @@ class AdminController extends Controller
         $product->save();
         return redirect()->back()->with('message','Catagory Updated Successfully');
     }
+    public function order(){
+        return view('admin.order');
+    }
 }
