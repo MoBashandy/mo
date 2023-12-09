@@ -51,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/remove_cart/{id}',[HomeController::class,'remove_cart']);
 Route::get('/cash_order',[HomeController::class,'cash_order']);
+// End Cart
 
+// PAY
+Route::get('/stripe/{total_price}',[HomeController::class,'stripe']);
+Route::post('stripe/{total_price}',[HomeController::class,'stripePost'])->name('stripe.post');
 
 
