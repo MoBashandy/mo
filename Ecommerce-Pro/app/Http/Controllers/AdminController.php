@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Order;
+use PDF;
 class AdminController extends Controller
 {
     // Category
@@ -85,6 +87,20 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Catagory Updated Successfully');
     }
     public function order(){
-        return view('admin.order');
+        $order = order::all();
+        return view('admin.order',compact('order'));
     }
+    public function delivered($id){
+        $order = order::find($id);
+        $order->delivary_status="delivered";
+        $order->payment_status="paid";
+        $order->save();
+        return redirect()->back()->with('message','Order Delivered Successfully');
+    }
+    public function print_pdf($id){
+        $order=Order::find($id);
+        $pdf=PDF::loadView('admin.pdf',compact('order'));
+        return $pdf->download('order_details.pdf');
+    }
+
 }

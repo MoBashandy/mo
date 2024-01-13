@@ -55,8 +55,10 @@ Route::get('/cash_order',[HomeController::class,'cash_order']);
 
 // PAY
 Route::get('/stripe/{total_price}',[HomeController::class,'stripe']);
-Route::post('stripe/{total_price}',[HomeController::class,'stripePost'])->name('stripe.post');
+Route::post('/stripe/{total_price}',[HomeController::class,'stripePost'])->name('stripe.post');
 // End PAY
 
 // Order
-Route::get('order',[AdminController::class,'order']);
+Route::get('/order',[AdminController::class,'order']);
+Route::get('/delivered/{id}',[AdminController::class,'delivered']);
+Route::get('/print_pdf/{id}',[AdminController::class,'print_pdf']);

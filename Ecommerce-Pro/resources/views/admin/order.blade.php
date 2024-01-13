@@ -37,7 +37,16 @@
         text-align: center;
 }
     .th_deg{
+    background-color: skyblue;
 
+}
+    .img_size{
+        width: 200px;
+        height: 100px;
+}
+
+    th{
+        padding: 10px;
 }
 </style>
   </head>
@@ -54,6 +63,12 @@
 
         <div class="main-panel">
             <div class="content-wrapper">
+                @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                 <h1 class="title_deg">All Orders</h1>
         <table class="table_deg">
             <tr class= "th_deg">
@@ -67,19 +82,31 @@
                 <th>Payment Status</th>
                 <th>Delivery Status</th>
                 <th>Image</th>
+                <th>Delivered</th>
+                <th>Download PDF</th>
             </tr>
+            @foreach($order as $order)
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{$order->name}}</td>
+                <td>{{$order->email}}</td>
+                <td>{{$order->address}}</td>
+                <td>{{$order->phone}}</td>
+                <td>{{$order->product_title}}</td>
+                <td>{{$order->quantity}}</td>
+                <td>{{$order->price}}</td>
+                <td>{{$order->payment_status}}</td>
+                <td>{{$order->delivary_status}}</td>
+                <td><img class="img_size" src="/product/{{$order->image}}"></td>
+                <td>
+                    @if($order->delivary_status=='processing')
+                    <a href="{{url('delivered',$order->id)}}" onclick="return confirm('Are you sure?')" class ="btn btn-primary">Delivered</a>
+                    @else
+                    <p style="color:green;">Delivered</p>
+                    @endif
+                </td>
+                <td><a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary">Print PDF</a></td>
             </tr>
+            @endforeach
         </table>
         <!-- main-panel ends -->
       </div>
