@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use Illuminate\Auth\Events\Verified;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,12 +24,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/AdminDashboard', [HomeController::class, 'AdminDashboard'])->name('dashboard');
 });
 // Admin Dashboard
-Route::get('/AdminDashboard',[HomeController::class,'AdminDashboard']);
+// Route::get('/AdminDashboard',[HomeController::class,'AdminDashboard'])->middleware('auth','Verified');
 
 // category
 Route::get('/view_category',[AdminController::class,'view_category']);
