@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/public">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,34 +22,17 @@
     <link rel="stylesheet" href="Home/admin/template/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
-
-<style type="text/css">
-    .title_deg{
-        text-align:center;
-        font-size:25px;
-        font-weight: bold;
-        padding-bottom: 40px;
-}
-    .table_deg{
-        border:2px solid white;
-        width: 70%;
-        margin: auto;
-        padding-top:50px;
-        text-align: center;
-}
-    .th_deg{
-    background-color: skyblue;
-
-}
-    .img_size{
-        width: 200px;
-        height: 100px;
-}
-
-    th{
-        padding: 10px;
-}
-</style>
+    <style type="text/css">
+        label{
+            display: inline-block;
+            width: 300px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        input{
+            color: :black;
+        }
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -61,55 +45,45 @@
         @include('admin.navbar')
           <!-- partial -->
 
-        <div class="main-panel">
+          <div class="main-panel">
             <div class="content-wrapper">
-                @if(session()->has('message'))
-                        <div class="alert alert-success">
-                            <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
-                            {{ session()->get('message') }}
+                <div class="div-center text-center">
+                    <h1>Send Email To <span style="color :blue">{{$order->email}}</span></h1>
+                </div>
+                <div style="padding-left: 32%">
+                    <form action="{{url('send_user_email',$order->id)}}" method="POST">
+                        @csrf
+                        <div style="padding-top: 30px ; padding-right: 30px">
+                            <label for="">Email Greeting : </label>
+                            <input type="text" name="greeting">
                         </div>
-                    @endif
-                <h1 class="title_deg">All Orders</h1>
-        <table class="table_deg">
-            <tr class= "th_deg">
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Product Title</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Payment Status</th>
-                <th>Delivery Status</th>
-                <th>Image</th>
-                <th>Delivered</th>
-                <th>Print PDF</th>
-                <th>Send Email</th>
-            </tr>
-            @foreach($order as $order)
-            <tr>
-                <td>{{$order->name}}</td>
-                <td>{{$order->email}}</td>
-                <td>{{$order->address}}</td>
-                <td>{{$order->phone}}</td>
-                <td>{{$order->product_title}}</td>
-                <td>{{$order->quantity}}</td>
-                <td>{{$order->price}}</td>
-                <td>{{$order->payment_status}}</td>
-                <td>{{$order->delivary_status}}</td>
-                <td><img class="img_size" src="/product/{{$order->image}}"></td>
-                <td>
-                    @if($order->delivary_status=='processing')
-                    <a href="{{url('delivered',$order->id)}}" onclick="return confirm('Are you sure?')" class ="btn btn-primary">Delivered</a>
-                    @else
-                    <h5 style="color:green;">Delivered</h5>
-                    @endif
-                </td>
-                <td><a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary">Print PDF</a></td>
-                <td><a href="{{url('send_email',$order->id)}}" class="btn btn-info">Send Email</a></td>
-            </tr>
-            @endforeach
-        </table>
+                        <div style="padding-top: 30px ; padding-right: 30px">
+                            <label for="">Email Firstline : </label>
+                            <input type="text" name="first">
+                        </div>
+                        <div style="padding-top: 30px ; padding-right: 30px">
+                            <label for="">Email Body : </label>
+                            <input type="text" name="body">
+                        </div>
+                        <div style="padding-top: 30px ; padding-right: 30px">
+                            <label for="">Email Button Name : </label>
+                            <input type="text" name="button">
+                        </div>
+                        <div style="padding-top: 30px ; padding-right: 30px">
+                            <label for="">Email URL : </label>
+                            <input type="text" name="url">
+                        </div>
+                        <div style="padding-top: 30px ; padding-right: 30px">
+                            <label for="">Email Last Line : </label>
+                            <input type="text" name="last">
+                        </div>
+                        <div style="padding-top: 30px ; padding-left: 215px">
+                            <input style="padding :10px; font-weight: bold;font-size: 18px; " type="submit" value="Send" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->

@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
 use PDF;
+Use App\Notifications\MyFirstNOT;
+use Illuminate\Support\Facades\Notification;
 class AdminController extends Controller
 {
     // Category
@@ -86,6 +88,9 @@ class AdminController extends Controller
         $product->save();
         return redirect()->back()->with('message','Catagory Updated Successfully');
     }
+    //End Product
+
+    //order
     public function order(){
         $order = order::all();
         return view('admin.order',compact('order'));
@@ -103,4 +108,21 @@ class AdminController extends Controller
         return $pdf->download('order_details.pdf');
     }
 
+    public function send_email($id){
+        $order=order::find($id);
+        return view('admin.email_info',compact('order'));
+    }
+    public function send_user_email(Request $request,$id){
+        $order=Order::find($id);
+        $details = [
+                        'greeting' => $request->greating,
+                        'first' => $request->first,
+                        'body' => $request->body,
+                        'button' => $request->button,
+                        'url' => $request->url,
+                        'last' => $request->last,
+                    ];
+        notification::send($order,new MyFirstNOT($details));
+        return redirect()->back();
+    }
 }
