@@ -125,4 +125,12 @@ class AdminController extends Controller
         notification::send($order,new MyFirstNOT($details));
         return redirect()->back();
     }
+    public function searchat(Request $request){
+        $search=$request->search;
+        $order = Order::where('name', 'LIKE', "%$search%")
+        ->orWhere('phone', 'LIKE', "%$search%")
+        ->orWhere('product_title', 'LIKE', "%$search%")
+        ->get();
+        return view('admin.order',compact('order'));
+    }
 }
