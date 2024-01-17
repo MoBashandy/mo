@@ -20,7 +20,17 @@ class HomeController extends Controller
         $user = Auth::user(); // Retrieve the authenticated user
 
         if ($user && $user->usertype == 1) {
-            return view("admin.home");
+            $product_count=Product::all()->count();
+            $order_count=Order::all()->count();
+            $user_count=User::all()->count();
+            $order=order::all();
+            $total_revenue=0;
+            foreach ($order as $order){
+                $total_revenue = $total_revenue + $order->price;
+            };
+            $delivary_status=order::where('delivary_status','=','delivered')->get()->count();
+            $pro_status=order::where('delivary_status','=','processing')->get()->count();
+            return view("admin.home",compact('product_count','order_count','user_count','total_revenue','delivary_status','pro_status'));
         } else {
             $product =Product::paginate(3);
             return view("Home.userpage", compact('product'));

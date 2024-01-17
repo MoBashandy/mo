@@ -93,7 +93,7 @@
                 <th>Print PDF</th>
                 <th>Send Email</th>
             </tr>
-            @foreach($order as $order)
+            @forelse($order as $order)
             <tr>
                 <td>{{$order->name}}</td>
                 <td>{{$order->email}}</td>
@@ -115,7 +115,11 @@
                 <td><a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary">Print PDF</a></td>
                 <td><a href="{{url('send_email',$order->id)}}" class="btn btn-info">Send Email</a></td>
             </tr>
-            @endforeach
+            @empty
+                <td colspan="16">
+                    No Data Found
+                </td>
+            @endforelse
         </table>
         <!-- main-panel ends -->
       </div>
