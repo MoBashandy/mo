@@ -71,3 +71,8 @@ Route:: get ('/search',[AdminController::class,'searchat']);
 // Order Home
 Route::get('/show_order',[HomeController::class,'show_order']);
 Route::get('/cancel_order/{id}',[HomeController::class,'cancel_order']);
+// End Order Home
+
+// Comments
+Route::post('/comment',[HomeController::class,'comment']);
+Route::post('/reply',[HomeController::class,'reply']);

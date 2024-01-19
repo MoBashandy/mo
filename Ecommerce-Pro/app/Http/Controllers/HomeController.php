@@ -11,6 +11,8 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Session;
 use Stripe;
 use Illuminate\Support\Facades\Hash;
+Use App\Models\Comment;
+Use App\Models\Reply;
 
 
 class HomeController extends Controller
@@ -30,16 +32,21 @@ class HomeController extends Controller
             };
             $delivary_status=order::where('delivary_status','=','delivered')->get()->count();
             $pro_status=order::where('delivary_status','=','processing')->get()->count();
-            return view("admin.home",compact('product_count','order_count','user_count','total_revenue','delivary_status','pro_status'));
+            return view("admin.home",compact('product_count','order_count','user_count','total_revenue',
+            'delivary_status','pro_status'));
         } else {
             $product =Product::paginate(3);
-            return view("Home.userpage", compact('product'));
+            $comment=Comment::orderby('id','desc')->get();
+            $reply=Reply::all();
+            return view("Home.userpage", compact('product','comment','reply'));
         }
     }
     public function index()
     {
         $product = Product::paginate(3);
-        return view("Home.userpage", compact('product'));
+        $comment=Comment::orderby('id','desc')->get();
+        $reply=Reply::all();
+        return view("Home.userpage", compact('product','comment','reply'));
     }
     public function product_details($id)
     {
@@ -173,24 +180,52 @@ class HomeController extends Controller
       Session::flash('success', 'Payment Successfull!');
 
       return back();
-  }
-  public function show_order()
-  {
-      if (Auth::id()) {
-        $user=Auth::user();
-        $userid=$user->id;
-        $order=Order::where('user_id','=',$userid)->get();
-        return view("Home.order",compact('order'));
-      } else {
-        return redirect('login');
-      }
-  }
-  public function cancel_order($id)
-  {
-    $order=Order::find($id);
-    $order->delivary_status="You Canceled The Order";
-    $order->save();
-    return redirect()->back()->with('message','Order Canceled Successfully');
-  }
+    }
+    public function show_order()
+    {
+        if (Auth::id()) {
+            $user=Auth::user();
+            $userid=$user->id;
+            $order=Order::where('user_id','=',$userid)->get();
+            return view("Home.order",compact('order'));
+        } else {
+            return redirect('login');
+        }
+    }
+    public function cancel_order($id)
+    {
+        $order=Order::find($id);
+        $order->delivary_status="You Canceled The Order";
+        $order->save();
+        return redirect()->back()->with('message','Order Canceled Successfully');
+    }
+    public function comment(Request $request){
+        if(Auth::id()){
+            $comment= new Comment;
+            $comment->name=Auth::user()->name;
+            $comment->user_id=Auth::user()->id;
+            $comment->comment=$request->comment;
+            $comment->save();
+            return redirect()->back();
+        }
+        else{
+            return redirect('login');
+        }
+    }
+
+    public function reply(Request $request){
+        if(Auth::id()){
+            $reply= new Reply;
+            $reply->name=Auth::user()->name;
+            $reply->user_id=Auth::user()->id;
+            $reply->reply=$request->reply;
+            $reply->comment_id=$request->commentId;
+            $reply->save();
+            return redirect()->back();
+        }
+        else{
+            return redirect('login');
+        }
+    }
 
 }
