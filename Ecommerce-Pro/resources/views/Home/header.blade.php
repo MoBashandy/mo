@@ -19,16 +19,19 @@
                            </ul>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="product.html">Products</a>
+                           <a class="nav-link" href="product.html">PRODUCTS</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="blog_list.html">Blog</a>
+                           <a class="nav-link" href="blog_list.html">BLOG</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="">Contact</a>
                         <li>
                         <li class="nav-item">
-                           <a class="nav-link" href="{{url('show_cart')}}">Cart</a>
+                           <a class="nav-link" href="{{url('show_cart')}}">CART</a>
+                        <li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{{url('show_order')}}">ORDER</a>
                         <li>
                                <form class="form-inline">
                                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -53,8 +56,8 @@
                              </ul>
                           </li>
                         @else
-                            <li class="nav-item mx-2">
-                               <a class="btn btn-primary " href="{{ route('login') }}">Log in</a>
+                            <li  class="nav-item mx-3">
+                               <a style="" class="btn btn-primary " href="{{ route('login') }}">Login</a>
                             </li>
                             <li class="nav-item">
                                   <a class="btn btn-success" href="{{ route('register') }}">Register</a>
