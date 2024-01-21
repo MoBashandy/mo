@@ -28,7 +28,7 @@
                            <a class="nav-link" href="">Contact</a>
                         <li>
                         <li class="nav-item">
-                           <a class="nav-link" href="{{url('show_cart')}}">CART</a>
+                           <a class="nav-link bg-slate-900" href="{{url('show_cart')}}">CART</a>
                         <li>
                         <li class="nav-item">
                            <a class="nav-link" href="{{url('show_order')}}">ORDER</a>

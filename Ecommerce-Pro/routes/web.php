@@ -81,3 +81,5 @@ Route::post('/reply',[HomeController::class,'reply']);
 // Search Home
 Route::get('/search_home',[HomeController::class,'search_home']);
 // End Search Home
+
+Route::get('/products',[HomeController::class,'products']);
