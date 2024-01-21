@@ -76,3 +76,8 @@ Route::get('/cancel_order/{id}',[HomeController::class,'cancel_order']);
 // Comments
 Route::post('/comment',[HomeController::class,'comment']);
 Route::post('/reply',[HomeController::class,'reply']);
+// End Comments
+
+// Search Home
+Route::get('/search_home',[HomeController::class,'search_home']);
+// End Search Home

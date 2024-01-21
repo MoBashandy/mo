@@ -227,5 +227,13 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+    public function search_home(Request $request)
+    {
+        $search_text = $request->search;
+        $product=Product::where('title','LIKE',"%$search_text%")->orWhere('category','LIKE',"%$search_text%")->paginate(3);
+        $comment=Comment::orderby('id','desc')->get();
+        $reply=Reply::all();
+        return view('home.userpage',compact('product','comment','reply'));
+    }
 
 }
