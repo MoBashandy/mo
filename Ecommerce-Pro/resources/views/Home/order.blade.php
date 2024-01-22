@@ -13,13 +13,13 @@
       <link rel="shortcut icon" href="images/favicon.png" type="">
       <title>Famms - Fashion HTML Template</title>
       <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="Home/css/bootstrap.css" />
+      <link rel="stylesheet" type="text/css" href="{{asset('Home/css/bootstrap.css')}}" />
       <!-- font awesome style -->
-      <link href="Home/css/font-awesome.min.css" rel="stylesheet" />
+      <link href="{{asset('Home/css/font-awesome.min.css')}}" rel="stylesheet" />
       <!-- Custom styles for this template -->
-      <link href="Home/css/style.css" rel="stylesheet" />
+      <link href="{{asset('Home/css/style.css')}}" rel="stylesheet" />
       <!-- responsive style -->
-      <link href="Home/css/responsive.css" rel="stylesheet" />
+      <link href="{{asset('Home/css/responsive.css')}}" rel="stylesheet" />
       <style type="text/css">
         .center{
             margin: auto;
@@ -83,12 +83,12 @@
                 </table>
             </div>
       <!-- jQery -->
-      <script src="Home/js/jquery-3.4.1.min.js"></script>
+      <script src="{{asset('Home/js/jquery-3.4.1.min.js')}}"></script>
       <!-- popper js -->
-      <script src="Home/js/popper.min.js"></script>
+      <script src="{{asset('Home/js/popper.min.js')}}"></script>
       <!-- bootstrap js -->
-      <script src="Home/js/bootstrap.js"></script>
+      <script src="{{asset('Home/js/bootstrap.js')}}"></script>
       <!-- custom js -->
-      <script src="Home/js/custom.js"></script>
+      <script src="{{asset('Home/js/custom.js')}}"></script>
    </body>
 </html>

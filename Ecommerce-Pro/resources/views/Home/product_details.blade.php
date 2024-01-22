@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
    <head>
-    <base href="/puplic">
       <!-- Basic -->
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,13 +13,13 @@
       <link rel="shortcut icon" href="images/favicon.png" type="">
       <title>Famms - Fashion HTML Template</title>
       <!-- bootstrap core css -->
-      <link rel="stylesheet" type="text/css" href="Home/css/bootstrap.css" />
+      <link rel="stylesheet" type="text/css" href="{{asset('Home/css/bootstrap.css')}}" />
       <!-- font awesome style -->
-      <link href="Home/css/font-awesome.min.css" rel="stylesheet" />
+      <link href="{{asset('Home/css/font-awesome.min.css')}}" rel="stylesheet" />
       <!-- Custom styles for this template -->
-      <link href="Home/css/style.css" rel="stylesheet" />
+      <link href="{{asset('Home/css/style.css')}}" rel="stylesheet" />
       <!-- responsive style -->
-      <link href="Home/css/responsive.css" rel="stylesheet" />
+      <link href="{{asset('Home/css/responsive.css')}}" rel="stylesheet" />
    </head>
    <body>
       <div class="hero_area">
@@ -31,7 +30,7 @@
       <div class="col-sm-6 col-md-4 col-lg-4" style="width:50%; margin:auto;
       padding: 30px;">
             <div class="img-box" style="padding: 20px">
-                <img height="300" width="300" src="product/{{$product->image}} " alt="">
+                <img height="300" width="300" src="/product/{{$product->image}} " alt="">
             </div>
             <div class="detail-box">
 
@@ -87,12 +86,12 @@
          </p>
       </div>
       <!-- jQery -->
-      <script src="Home/js/jquery-3.4.1.min.js"></script>
+      <script src="{{asset('Home/js/jquery-3.4.1.min.js')}}"></script>
       <!-- popper js -->
-      <script src="Home/js/popper.min.js"></script>
+      <script src="{{asset('Home/js/popper.min.js')}}"></script>
       <!-- bootstrap js -->
-      <script src="Home/js/bootstrap.js"></script>
+      <script src="{{asset('Home/js/bootstrap.js')}}"></script>
       <!-- custom js -->
-      <script src="Home/js/custom.js"></script>
+      <script src="{{asset('Home/js/custom.js')}}"></script>
    </body>
 </html>

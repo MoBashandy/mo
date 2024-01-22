@@ -106,12 +106,12 @@
          </p>
       </div>
       <!-- jQery -->
-      <script src="Home/js/jquery-3.4.1.min.js"></script>
+      <script src="{{asset('Home/js/jquery-3.4.1.min.js')}}"></script>
       <!-- popper js -->
-      <script src="Home/js/popper.min.js"></script>
+      <script src="{{asset('Home/js/popper.min.js')}}"></script>
       <!-- bootstrap js -->
-      <script src="Home/js/bootstrap.js"></script>
+      <script src="{{asset('Home/js/bootstrap.js')}}"></script>
       <!-- custom js -->
-      <script src="Home/js/custom.js"></script>
+      <script src="{{asset('Home/js/custom.js')}}"></script>
    </body>
 </html>

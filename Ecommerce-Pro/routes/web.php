@@ -83,3 +83,4 @@ Route::get('/search_home',[HomeController::class,'search_home']);
 // End Search Home
 
 Route::get('/products',[HomeController::class,'products']);
+Route::get('/search_product',[HomeController::class,'search_product']);

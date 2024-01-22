@@ -13,6 +13,13 @@
                 <input type="text" style="width:500px;" name="search" placeholder="search for products"/>
             <input type="submit" value="search" />
             </form>
+            <br>
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+                <button class="close" typy="button" data-dismiss="alert" eria-hidden="true">x</button>
+                {{ session()->get('message') }}
+               </div>
+               @endif
         </div>
            <div class="row">
             @foreach ($product as $products)
